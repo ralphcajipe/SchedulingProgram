@@ -1,14 +1,14 @@
 # Scheduling Program
 
 ## Tasks (top-down order)
-- ###Python files - Current version03
+- ### Python files - Current version03
   - Waiting for Varon's test cases and approval.
 
-- ###Google Slides
+- ### Google Slides
   - Waiting for Dhanco's results.
 
-- ###Documentation
+- ### Documentation
   - Waiting for Ralph's results.
 
-- ###Recording
+- ### Recording
   - Complete 3 tasks first.
