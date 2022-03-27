@@ -2,7 +2,10 @@
 
 ## Tasks (top-down order)
 - ### Python files - Current version03
-  - Waiting for Varon's test cases and approval.
+    - main.py
+    - Functions.py
+    - project_class.py
+    - Waiting for Varon's test cases and approval.
 
 - ### Google Slides
   - Waiting for Dhanco's results.
