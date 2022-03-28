@@ -4,7 +4,7 @@
 from project_class import Project
 import os
 import copy
-import atexit
+import atexit  # unused import
 
 # Initialize lists []
 project_queue = []
@@ -82,9 +82,9 @@ def reader():
                         # Create a Project() class object instance
                         project = Project(int(line[0]), line[1], int(
                             line[2]), int(line[3]), True)
-                        # add the project to the project list
+                        # Add project to the project list
 
-                        # avoiding duplications
+                        # Avoiding duplicates
                         if project not in project_completed:
                             project_completed.append(project)
                     except ValueError as ve:
@@ -94,22 +94,22 @@ def reader():
                 print("The header is not correct")
                 file.close()
 
-                # rename the file to done.csv.bak
+                # Rename the file to done.csv.bak
                 if os.path.exists(done_csv + ".bak"):
                     os.remove(done_csv + ".bak")
 
                 os.rename(done_csv, done_csv + ".bak")
 
-                # create a new file done.csv
+                # Create new file done.csv
                 with open(done_csv, "w") as file:
-                    # write the header
+                    # Write header
                     file.write(file_info + "\n")
                     file.close()
 
     else:
-        # create a new file done.csv
+        # Create new file done.csv
         with open(done_csv, "w") as file:
-            # write the header
+            # Write header
             file.write(file_info + "\n")
             file.close()
 
@@ -147,35 +147,34 @@ def get_project():
     """Function 3: Get a Project"""
     global project_list, project_queue
 
-    # check if queue is empty
+    # Check if queue is empty
     if len(project_queue) == 0:
         print("Project queue is empty, generate a queue first. (option 1)")
     else:
-        # get a project from the top of the queue...
+        # Get a project from top of the queue
         proj = project_queue[0]
 
-        # ...print its details...
+        # Show details
         print("This will be your current project: " + str(proj))
 
-        # ...confirm the project selection...
+        # Confirm project selection
         user_input = input("Is this correct? ('y' or any key to cancel): ")
         if user_input == 'y':
             print("Marking project id " + str(proj.id) + " as complete.")
             proj.complete = True
 
-            # ...pop the project from the queue...
+            # Pop project from the queue
             project_queue.pop(0)
 
-            # ...remove the project from the project list...
+            # Remove project from the project list
             project_list.remove(proj)
 
-            # ...and add it to the completed list
+            # Add/append project to the completed list
             project_completed.append(proj)
         else:
-            # ...otherwise, confirm cancellation.
             print("Project selection cancelled.")
 
-        # Print the queue
+        # Print queue
         print("Current Project queue: ")
         for project in project_queue:
             print(project)
@@ -193,29 +192,27 @@ def schedule_project():
     user_input = input("\nEnter schedule menu choice: ")
     if user_input == '1':
 
-        # check if the project list is empty
+        # if project list is empty
         if len(project_list) == 0:
             print("Project list is empty, please add projects first!")
         else:
-            # create queue from project list
+            # Create queue from project list
             project_queue = copy.deepcopy(project_list)
 
-            # sort projects by priority first, then size
+            # Sort projects by priority first and then size
             project_queue.sort(key=lambda x: (x.priority, x.size, x.id))
 
-            # print the queue
+            # Print queue
             print("Project queue created")
             print("Projects in queue: ")
             for project in project_queue:
                 print(project)
 
     elif user_input == '2':
-        # View Schedule
-        # check if queue is empty
+        # View Schedule and if queue is empty
         if len(project_queue) == 0:
             print("Project queue is empty, generate a queue first.")
         else:
-            # print the queue
             print("Current Project queue: ")
             for project in project_queue:
                 print(project)
@@ -241,7 +238,7 @@ def view_project():
                 print("\tProject list is empty")
                 break
 
-            # get project id
+            # Get project id
             try:
                 project_id = int(input("Enter project id: "))
             except ValueError as ve:
@@ -249,7 +246,7 @@ def view_project():
                 print(f"Except: {ve}")
                 continue
 
-            # check if id exists
+            # Check if id exists
             if project_id in [project.id for project in
                               project_list + project_completed]:
                 for project in project_list + project_completed:
@@ -260,8 +257,6 @@ def view_project():
                 print("Project not found")
 
         elif user_input == '2':
-            # Completed Projects
-            # Enumerate all projects that are complete
             print("\tProjects that are complete: ")
             if len(project_completed) == 0:
                 print("\tNo complete projects")
@@ -270,8 +265,6 @@ def view_project():
                     print(project)
 
         elif user_input == '3':
-            # All Projects
-            # list all projects
             print("\tIncomplete projects: ")
             if len(project_list) == 0:
                 print("\tNo projects in list")
@@ -300,24 +293,23 @@ def insert_project():
     while True:
 
         try:
-            # get project ID
+            # Get project ID
             proj_id = int(input("\tEnter Project ID: "))
         except ValueError as ve:
             print("\tInvalid ID. Should be a number, please try again")
             print(f"\t(exception: {str(ve)})")
             continue
 
-        # check if id exists in project_list
+        # Check if id exists in project_list
         if proj_id in [project.id for project in
                        project_list + project_completed]:
             print("\tID Number already exists, try again")
             continue
 
-        # get project name
         proj_name = input("\tEnter Project Name: ")
 
         try:
-            # get number of pages
+            # Get number of pages
             proj_size = int(input("\tEnter Number of Pages: "))
         except ValueError as ve:
             print(
@@ -326,7 +318,7 @@ def insert_project():
             print(f"\t(exception: {str(ve)})")
             continue
 
-        # get priority
+        # Get priority
         try:
             proj_priority = int(input("\tEnter Priority: "))
 
@@ -337,16 +329,17 @@ def insert_project():
             print(f"\t(exception: {str(ve)})")
             continue
 
-        # create project
+        # Create new project
         new_project = Project(proj_id, proj_name, proj_size, proj_priority)
 
-        # add to list
+        # Add/append to list
         project_list.append(new_project)
 
-        # print out confirmation
+        # Show confirmation
         print(f'\tProject "{new_project.title}" added to project list')
 
-        # clear project queue (if not empty) and notify user
+        # Clear project queue if not empty
+        # and prompt user
         if len(project_queue) != 0:
             project_queue.clear()
             print(
@@ -361,7 +354,7 @@ def insert_project():
 def main():
     """Function 7: Main Menu"""
 
-    # read the file
+    # Read the file
     reader()
 
     # Flag to act as a signal to the program
@@ -389,18 +382,22 @@ def main():
         elif user_input == '2':
             view_project()
 
+        # Schedule Projects
         elif user_input == '3':
             schedule_project()
 
+        # Get Project
         elif user_input == '4':
             get_project()
 
+        # Exit
         elif user_input == '5':
             print("Exited")
             active_run = False
 
+        # Invalid input
         else:
             print("Invalid Input, try again")
 
-    # write the file
+    # Write the file
     writer()
