@@ -5,13 +5,13 @@
     - main.py
     - Functions.py
     - project_class.py
-    - Waiting for Varon's test cases and approval.
+    - Completed by Ralph and Approved by Varon
 
 - ### Google Slides
-  - Waiting for Dhanco's results.
+  - Completed by Dhanco
 
 - ### Documentation
-  - Waiting for Ralph's results.
+  - Completed by Ralph
 
 - ### Recording
-  - Complete 3 tasks first.
+  - Completed by Dhanco
